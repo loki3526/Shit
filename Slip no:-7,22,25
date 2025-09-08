@@ -1,0 +1,23 @@
+Write a C Program that demonstrates redirection of 
+standard output to a file
+#include <stdio.h>
+#include <stdlib.h>
+int main() {
+ // File to which the output will be redirected
+ const char *filename = "output.txt";
+ // Redirect stdout to the specified file
+FILE *file = freopen(filename, "w", stdout);
+ if (file == NULL) {
+ perror("freopen");
+ return 1;
+ }
+ // Now any printf statements will write to "output.txt" 
+instead of the console
+ printf("This line will be written to the file.\n");
+ printf("Redirecting standard output in C is easy!\n");
+ // Optional: restore stdout to console (if needed)
+ fflush(stdout);
+ freopen("/dev/tty", "w", stdout);
+ printf("This line will be printed to the console.\n");
+ return 0;
+}
